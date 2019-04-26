@@ -1,4 +1,60 @@
 <h2>Hello World</h2>
 <p>I want to build an app using Fathym.</p>
+var userChoice = prompt("Do you choose rock, paper or scissors?");
+/*if ((userChoice!="rock") || (userChoice!="paper") || (userChoice!="scissors") || (userChoice!="bomb")) {
+    prompt("You're creative, but you can't play that. Try again by typing rock, paper or scissors.");
+}
+    else {
+        return "It's;
+    }
+};*/
 
+var computerChoice = Math.random();
+if (computerChoice < 0.34) {
+	computerChoice = "rock";
+} else if(computerChoice <= 0.67) {
+	computerChoice = "paper";
+} else {
+	computerChoice = "scissors";
+} console.log("Computer: " + computerChoice);
+
+var compare = function(choice1, choice2) {
+    if (choice1===choice2) {
+        prompt("The result is a tie! Have a rematch! Do you choose rock, paper or scissors?");
+    }
+    else if (choice1==="rock") {
+       if (choice2==="scissors") {
+           return "Rock wins";
+       }
+       else {
+           return "Paper wins";
+       }
+    }
+    else if (choice1==="paper") {
+        if (choice2==="rock") {
+            return "Paper wins";
+        }
+        else {
+            return "Scissors wins";
+        }
+    }
+    else if (choice1==="scissors") {
+        if (choice2==="rock") {
+            return "Rock wins";
+        }
+        else {
+            return "Scissors wins";
+        }
+    }
+    else if (choice1==="bomb") {
+        return "Bomb destroys all!";
+    }
+    else {
+        return "You're creative, but you can't play that. Try again by typing rock, paper or scissors.";
+    }
+};
+
+/*var playAgain = prompt("Do you choose rock, paper or scissors?");*/
+
+compare (userChoice, computerChoice);
 <router-outlet></router-outlet>
