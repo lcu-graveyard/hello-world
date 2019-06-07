@@ -1,16 +1,38 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import { FathymSharedModule, MaterialModule } from '@lcu-ide/common';
+import {
+  FlexLayoutComponent,
+  HomeComponent,
+  ReactiveFormComponent,
+  TutorialsComponent,
+  PageNotFoundComponent,
+  NavigationComponent,
+  SideNavComponent
+} from '@fathym-it/hello-world-common';
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FlexLayoutComponent,
+    HomeComponent,
+    ReactiveFormComponent,
+    TutorialsComponent,
+    PageNotFoundComponent,
+    NavigationComponent,
+    SideNavComponent
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    FathymSharedModule,
+    MaterialModule,
+    FlexLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]
