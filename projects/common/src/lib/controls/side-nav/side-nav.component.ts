@@ -37,13 +37,7 @@ export class SideNavComponent {
    */
   // tslint:disable-next-line:no-input-rename
   @Input('nav-links')
-  get NavLinks(): Array<NavLinkModel> {
-    return this._navLinks;
-  }
-
-  set NavLinks(val: Array<NavLinkModel>) {
-    this._navLinks = val;
-  }
+  public NavLinks: Array<NavLinkModel>;
 
   constructor(private breakpointObserver: BreakpointObserver) {}
 

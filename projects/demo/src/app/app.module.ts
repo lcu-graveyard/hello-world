@@ -6,32 +6,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { FathymSharedModule, MaterialModule } from '@lcu-ide/common';
-import {
-  FlexLayoutComponent,
-  HomeComponent,
-  ReactiveFormComponent,
-  TutorialsComponent,
-  PageNotFoundComponent,
-  NavigationComponent,
-  SideNavComponent
-} from '@fathym-it/hello-world-common';
+import { HelloWorldModule } from '@fathym-it/hello-world-common';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    FlexLayoutComponent,
-    HomeComponent,
-    ReactiveFormComponent,
-    TutorialsComponent,
-    PageNotFoundComponent,
-    NavigationComponent,
-    SideNavComponent
+    AppComponent
   ],
   imports: [
     BrowserAnimationsModule,
     AppRoutingModule,
     FathymSharedModule,
     MaterialModule,
+    HelloWorldModule,
     FlexLayoutModule
   ],
   providers: [],
