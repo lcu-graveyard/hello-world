@@ -1,3 +1,4 @@
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -11,6 +12,9 @@ import { PageNotFoundComponent } from './controls/page-not-found/page-not-found.
 import { NavigationComponent } from './controls/navigation/navigation.component';
 import { SideNavComponent } from './controls/side-nav/side-nav.component';
 import { RouterModule } from '@angular/router';
+import { UserComponent } from './controls/user/user.component';
+import { UsersListComponent } from './controls/users-list/users-list.component';
+import { NavListComponent } from './controls/nav-list/nav-list.component';
 
 
 
@@ -22,11 +26,15 @@ import { RouterModule } from '@angular/router';
     HomeComponent,
     PageNotFoundComponent,
     NavigationComponent,
-    SideNavComponent],
+    SideNavComponent,
+    UserComponent,
+    UsersListComponent,
+    NavListComponent],
   imports: [
     CommonModule,
     MaterialModule,
-    RouterModule
+    RouterModule,
+    FlexLayoutModule
   ],
   exports: [
     TutorialsComponent,
@@ -35,7 +43,10 @@ import { RouterModule } from '@angular/router';
     HomeComponent,
     PageNotFoundComponent,
     NavigationComponent,
-    SideNavComponent],
+    SideNavComponent,
+    UserComponent,
+    UsersListComponent,
+    NavListComponent],
   entryComponents: [
     TutorialsComponent,
     ReactiveFormComponent,
@@ -43,6 +54,9 @@ import { RouterModule } from '@angular/router';
     HomeComponent,
     PageNotFoundComponent,
     NavigationComponent,
-    SideNavComponent]
+    SideNavComponent,
+    UserComponent,
+    UsersListComponent,
+    NavListComponent]
 })
 export class HelloWorldModule { }

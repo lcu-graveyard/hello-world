@@ -5,17 +5,23 @@ import {
   FlexLayoutComponent,
   ReactiveFormComponent,
   PageNotFoundComponent,
-  TutorialsComponent } from '@fathym-it/hello-world-common';
+  TutorialsComponent,
+  UserComponent} from '@fathym-it/hello-world-common';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
   { path: 'home', component: HomeComponent},
-  { path: 'home/:Param', component: HomeComponent},
-  { path: 'fxLayout', component: FlexLayoutComponent},
-  { path: 'fxLayout:/Param', component: FlexLayoutComponent},
-  { path: 'reactiveForm', component: ReactiveFormComponent},
-  { path: 'reactiveForm:/Param', component: ReactiveFormComponent},
+  { path: 'home/:param', component: HomeComponent},
+  { path: 'fxLayout', component: FlexLayoutComponent, children: [
+    { path: ':param', component: FlexLayoutComponent}
+  ]},
+  { path: 'reactiveForm', component: ReactiveFormComponent, children: [
+    { path: ':param', component: ReactiveFormComponent}
+  ]},
   { path: 'tutorials', component: TutorialsComponent},
+  { path: 'user', component: UserComponent, children: [
+    { path: ':id/:name/:role', component: UserComponent},
+  ]},
   { path: '**', component: PageNotFoundComponent }
   // { path: 'map/:Params', component: AmblOnMapComponent},
 

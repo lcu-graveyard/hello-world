@@ -1,35 +1,32 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport="false"
-    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
+  <mat-sidenav 
+    #drawer 
+    class="sidenav" 
+    fixedInViewport="false"
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" 
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="!(isHandset$ | async)">
-    <mat-toolbar color="primary">Menu</mat-toolbar>
-    <mat-nav-list *ngFor="let link of NavLinks">
-      <a mat-list-item [routerLink]="link.RouterURL" routerLinkActive="active" *ngIf="!link.Param">{{ link.Label }}</a>
-      <a mat-list-item [routerLink]="[link.RouterURL, link.Param]" routerLinkActive="active" *ngIf="link.Param">{{ link.Label }}</a>
-    </mat-nav-list>
+  <lcu-nav-list [nav-links]="NavLinks"></lcu-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar color="primary">
-      <div fxFlex="20" fxLayoutAlign="start center">
+    <mat-toolbar color="primary" fxLayout="row">
+
+      <div fxFlex="20" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
         <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
           *ngIf="isHandset$ | async">
           <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
         </button>
         <img class="logo" [src]="LogoURL" alt="{{LogoAlt}}">
+        <strong class="mat-headline">Fathym</strong>
       </div>
       <div fxLayout="row" fxFlex fxLayoutGap="20px" fxLayoutAlign="end center">
-        <mat-icon class="example-icon" aria-hidden="false" aria-label="Example heart icon">favorite</mat-icon>
-        <mat-icon class="example-icon" aria-hidden="false" aria-label="Example delete icon">delete</mat-icon>
-        <button mat-icon-button [mat-menu-trigger-for]="menu">
-          <mat-icon>more_vert</mat-icon>
-        </button>
-        <mat-menu x-position="before" #menu="matMenu">
-          <button mat-menu-item>Option 1</button>
-          <button mat-menu-item>Option 2</button>
-        </mat-menu>
+        <!-- <mat-icon class="example-icon" aria-hidden="false" aria-label="Example heart icon">favorite</mat-icon>
+        <mat-icon class="example-icon" aria-hidden="false" aria-label="Example delete icon">delete</mat-icon> -->
+        <lcu-users-list [users]="Users"></lcu-users-list>
       </div>
+
     </mat-toolbar>
-    <!-- Add Content Here -->
+    <!-- Content is injected here -->
     <ng-content></ng-content>
   </mat-sidenav-content>
 </mat-sidenav-container>
