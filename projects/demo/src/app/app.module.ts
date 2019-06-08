@@ -15,10 +15,10 @@ import { HelloWorldModule } from '@fathym-it/hello-world-common';
   imports: [
     BrowserAnimationsModule,
     AppRoutingModule,
+    FlexLayoutModule,
     FathymSharedModule,
     MaterialModule,
-    HelloWorldModule,
-    FlexLayoutModule
+    HelloWorldModule
   ],
   providers: [],
   bootstrap: [AppComponent]

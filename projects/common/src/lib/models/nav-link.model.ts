@@ -4,6 +4,11 @@
 export class NavLinkModel {
 
     /**
+     * Menu icon
+     */
+    public Icon?: string;
+
+    /**
      * Menu label
      */
     public Label: string;
@@ -18,7 +23,8 @@ export class NavLinkModel {
      */
     public RouterURL: string;
 
-    constructor(label: string, rounterURL: string, param?: object) {
+    constructor(label: string, rounterURL: string, icon?: string, param?: object) {
+        this.Icon = icon;
         this.Label = label;
         this.RouterURL = rounterURL;
         this.Param = param;

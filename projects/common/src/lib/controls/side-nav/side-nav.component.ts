@@ -3,6 +3,8 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { NavLinkModel } from '../../models/nav-link.model';
+import { UserModel } from '../../models/user.model';
+import { UsersService } from '../../services/user.service';
 
 @Component({
   selector: 'lcu-side-nav',
@@ -17,6 +19,8 @@ export class SideNavComponent {
     );
 
   protected _navLinks: Array<NavLinkModel>;
+
+  public Users: Array<UserModel>;
 
   /**
    * Input property for logo
@@ -39,6 +43,12 @@ export class SideNavComponent {
   @Input('nav-links')
   public NavLinks: Array<NavLinkModel>;
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  constructor(protected userService: UsersService, protected breakpointObserver: BreakpointObserver) {}
 
+  public ngOnInit(): void {
+    this.userService.GetUsers().subscribe(data => {
+      this.Users = data;
+    });
+  }
 }
+
