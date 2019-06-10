@@ -1,7 +1,8 @@
 import { UserConstants } from '../utils/constants/user.constants';
 import { Injectable } from '@angular/core';
 import { UserModel } from '../models/user.model';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs/internal/Observable';
+import { of } from 'rxjs/internal/observable/of';
 
 const Users: Array<UserModel> = [
     {

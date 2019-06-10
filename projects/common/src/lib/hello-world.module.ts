@@ -17,7 +17,6 @@ import { UsersListComponent } from './controls/users-list/users-list.component';
 import { NavListComponent } from './controls/nav-list/nav-list.component';
 
 
-
 @NgModule({
   declarations: [
     TutorialsComponent,
@@ -29,7 +28,8 @@ import { NavListComponent } from './controls/nav-list/nav-list.component';
     SideNavComponent,
     UserComponent,
     UsersListComponent,
-    NavListComponent],
+    NavListComponent
+  ],
   imports: [
     CommonModule,
     MaterialModule,
@@ -46,7 +46,8 @@ import { NavListComponent } from './controls/nav-list/nav-list.component';
     SideNavComponent,
     UserComponent,
     UsersListComponent,
-    NavListComponent],
+    NavListComponent
+  ],
   entryComponents: [
     TutorialsComponent,
     ReactiveFormComponent,
@@ -59,4 +60,6 @@ import { NavListComponent } from './controls/nav-list/nav-list.component';
     UsersListComponent,
     NavListComponent]
 })
-export class HelloWorldModule { }
+
+export class HelloWorldModule {
+}

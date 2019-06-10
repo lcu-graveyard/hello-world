@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { FathymSharedModule, MaterialModule } from '@lcu-ide/common';
-import { HelloWorldModule } from '@fathym-it/hello-world-common';
+import { HelloWorldModule, TutorialService,  } from '@fathym-it/hello-world-common';
 
 @NgModule({
   declarations: [
@@ -20,7 +20,7 @@ import { HelloWorldModule } from '@fathym-it/hello-world-common';
     MaterialModule,
     HelloWorldModule
   ],
-  providers: [],
+  providers: [TutorialService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

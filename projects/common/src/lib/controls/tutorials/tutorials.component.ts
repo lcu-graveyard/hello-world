@@ -1,15 +1,39 @@
-import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+
+import { Component, OnInit, OnDestroy } from '@angular/core';
+
+import { TutorialModel } from '../../models/tutorial.model';
+import { SharedNotificationService } from '../../services/shared-notification.service';
+import { TutorialService } from '../../services/tutorial.service';
+
 
 @Component({
   selector: 'lcu-tutorials',
   templateUrl: './tutorials.component.html',
   styleUrls: ['./tutorials.component.scss']
 })
-export class TutorialsComponent implements OnInit {
+export class TutorialsComponent implements OnInit, OnDestroy {
 
-  constructor() { }
+  public Tutorials: Array<TutorialModel>;
 
-  ngOnInit() {
+  protected tutorialDataSubscription: Subscription;
+
+  constructor(protected sharedNotificationService: SharedNotificationService, protected tutorialsService: TutorialService) { }
+
+  public ngOnInit() {
+    // this.tutorialDataSubscription = this.sharedNotificationService.TutorialsDataUpdated.subscribe(
+    //   (data: Array<TutorialModel>) => {
+    //       console.log('tutorial component', data);
+    //       this.Tutorials = data;
+    //    }
+    //   );
+    this.tutorialsService.GetTutorials().subscribe((data: Array<TutorialModel>) => {
+      this.Tutorials = data;
+    });
+  }
+
+  public ngOnDestroy(): void {
+    // this.tutorialDataSubscription.unsubscribe();
   }
 
 }

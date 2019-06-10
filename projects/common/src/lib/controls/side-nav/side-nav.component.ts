@@ -46,7 +46,7 @@ export class SideNavComponent {
   constructor(protected userService: UsersService, protected breakpointObserver: BreakpointObserver) {}
 
   public ngOnInit(): void {
-    this.userService.GetUsers().subscribe(data => {
+    this.userService.GetUsers().subscribe((data: Array<UserModel>) => {
       this.Users = data;
     });
   }
