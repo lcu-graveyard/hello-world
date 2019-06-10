@@ -10,4 +10,5 @@ export * from './lib/controls/user/user.component';
 export * from './lib/controls/nav-list/nav-list.component';
 export * from './lib/utils/constants/user.constants';
 export * from './lib/services/user.service';
+export * from './lib/utils/parse-route.utils';
 export * from './lib/models/nav-link.model';
