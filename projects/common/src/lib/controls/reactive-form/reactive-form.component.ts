@@ -1,8 +1,16 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, AbstractControl, FormControl, Validators } from '@angular/forms';
+import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { StatesModel } from '../../models/states.model';
 import { ReactiveFormService } from '../../services/reactive-form.service';
+import { ReactiveFormModel } from './../../models/reactive-form.model';
+import { Observable } from 'rxjs/internal/Observable';
+import { map } from 'rxjs/internal/operators/map';
+import { Subscription } from 'rxjs/internal/Subscription';
+import { PasswordValidator, EmailValidator, UserNameValidator } from '@lcu-ide/common';
+import { startWith } from 'rxjs/operators';
+
 
 @Component({
   selector: 'lcu-reactive-form',
@@ -12,9 +20,29 @@ import { ReactiveFormService } from '../../services/reactive-form.service';
 export class ReactiveFormComponent implements OnInit {
 
   /**
+   * Local property for session values
+   */
+  protected _sessionValues: ReactiveFormModel;
+
+  /**
    * Local property for selecting terms
    */
   protected _termsChecked: boolean;
+
+  /**
+   * Getter / Setter for session values
+   */
+  protected get sessionValues(): ReactiveFormModel {
+    if (sessionStorage.length === 0) {
+      return new ReactiveFormModel();
+    }
+
+    return JSON.parse(sessionStorage.getItem('formValues'));
+  }
+
+  protected set sessionValues(val: ReactiveFormModel) {
+    this._sessionValues = val;
+  }
 
   /**
    * Input property for checking terms
@@ -116,6 +144,9 @@ export class ReactiveFormComponent implements OnInit {
    */
   public HideConfirmPassword: boolean = true;
 
+  public IsHandsetMode: Observable<boolean>;
+  protected observerSubscription: Subscription;
+
 /**
  * property for reactive form
  */
@@ -125,6 +156,7 @@ export class ReactiveFormComponent implements OnInit {
    * property to states list
    */
   public States: Array<StatesModel>;
+  public StatesFiltered: Observable<Array<StatesModel>>;
 
   /**
    * propery for form title
@@ -141,10 +173,15 @@ export class ReactiveFormComponent implements OnInit {
    */
   public SubTitle: string;
 
-  constructor(protected activatedRoute: ActivatedRoute, protected reactiveFormService: ReactiveFormService) {
+  constructor(
+    protected activatedRoute: ActivatedRoute,
+    protected reactiveFormService: ReactiveFormService,
+    protected breakpointObserver: BreakpointObserver) {
     this.Title = 'Angular Reactive Form';
     this.TitleIcon = 'vertical_split';
     this.SubTitle = 'Responsive Form';
+
+    this.monitorBreakpoints();
   }
 
   ngOnInit() {
@@ -152,6 +189,8 @@ export class ReactiveFormComponent implements OnInit {
     this.setupForm();
 
     this.getStates();
+
+    this.setupFilteringStates();
 
     this.activatedRoute.paramMap.subscribe(params => {
       console.log('reactive form param', params.get('id'));
@@ -181,18 +220,34 @@ export class ReactiveFormComponent implements OnInit {
    */
   protected setupForm(): void {
     this.Form = new FormGroup({
-      firstNameControl: new FormControl('', Validators.compose([Validators.required])),
-      lastNameControl: new FormControl('', Validators.compose([Validators.required])),
-      usernameControl: new FormControl('', Validators.compose([Validators.required])),
-      emailControl: new FormControl('', Validators.compose([Validators.required])),
-      passwordControl: new FormControl('', Validators.compose([Validators.required])),
-      confirmPasswordControl: new FormControl('', Validators.compose([Validators.required])),
-      addressControl: new FormControl('', Validators.compose([Validators.required])),
-      cityControl: new FormControl('', Validators.compose([Validators.required])),
-      stateControl: new FormControl('', Validators.compose([Validators.required])),
-      zipcodeControl: new FormControl('', Validators.compose([Validators.required])),
-      termsControl: new FormControl('')
+      firstNameControl: new FormControl(this.sessionValues.FirstName, Validators.compose([Validators.required])),
+      lastNameControl: new FormControl(this.sessionValues.lastName, Validators.compose([Validators.required])),
+      usernameControl: new FormControl(this.sessionValues.Username, Validators.compose([
+        Validators.required,
+        Validators.pattern(UserNameValidator.UsernamePattern)])),
+      emailControl: new FormControl(this.sessionValues.Email, Validators.compose(
+        [
+          Validators.required,
+          Validators.pattern(EmailValidator.EmailPatternDomain)])),
+      passwordControl: new FormControl(this.sessionValues.Password, Validators.compose([
+        Validators.required,
+        Validators.pattern(PasswordValidator.StrongPassword)
+      ])),
+      confirmPasswordControl: new FormControl(this.sessionValues.ConfirmPassword, Validators.compose([Validators.required])),
+      addressControl: new FormControl(this.sessionValues.Address, Validators.compose([Validators.required])),
+      cityControl: new FormControl(this.sessionValues.City, Validators.compose([Validators.required])),
+      stateControl: new FormControl(this.sessionValues.State, Validators.compose([Validators.required])),
+      termsControl: new FormControl(this.sessionValues.Terms, Validators.compose([Validators.required])),
+      zipcodeControl: new FormControl(this.sessionValues.Zipcode, Validators.compose([Validators.required]))
     });
+
+    this.Form.validator = PasswordValidator.PasswordsMatch(this.PasswordControl, this.ConfirmPasswordControl);
+
+    this.onChanges();
+  }
+
+  protected getFormValues(): void {
+
   }
 
   /**
@@ -202,6 +257,54 @@ export class ReactiveFormComponent implements OnInit {
     this.reactiveFormService.GetStates().subscribe((data: Array<StatesModel>) => {
       this.States = data;
     });
+  }
+
+  /**
+   * Listen for form changes
+   */
+  protected onChanges(): void {
+
+    this.Form.valueChanges.subscribe((val: ReactiveFormModel) => {
+      this.updateSessionStorage(val);
+    });
+  }
+
+   /**
+    * Store registration values
+    * 
+    * We need to use the state for this, but for now this will work
+    */
+   protected updateSessionStorage(val: ReactiveFormModel): void {
+    sessionStorage.setItem('formValues', JSON.stringify(val));
+  }
+
+  /**
+   * Breakpoints for screen sizes
+   */
+  protected monitorBreakpoints(): void {
+    this.observerSubscription = this.breakpointObserver.observe([Breakpoints.Small])
+    .subscribe((result: BreakpointState) => {
+      console.log(result.matches);
+    });
+  }
+
+  /**
+   * Filter state list
+   * 
+   * @param val string to filter state list
+   */
+  protected filterStateList(val: string): Array<StatesModel> {
+    const filterValue: string = val.toLocaleLowerCase();
+
+    return this.States.filter(state => state.Name.toLocaleLowerCase().indexOf(filterValue) === 0);
+  }
+
+  protected setupFilteringStates(): void {
+    this.StatesFiltered = this.StateControl.valueChanges
+    .pipe(
+      startWith(''),
+      map(state => state ? this.filterStateList(state) : this.States.slice())
+    );
   }
 
 }
