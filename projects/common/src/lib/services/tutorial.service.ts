@@ -12,8 +12,8 @@ const tutorials: Array<TutorialModel> = [
     },
     {
         Id: 2,
-        Label: 'Angular fxLayout Examples',
-        Url: 'https://tburleson-layouts-demos.firebaseapp.com/#/docs',
+        Label: 'Angular Official Documentation',
+        Url: 'https://angular.io/',
         Target: '_blank',
     },
     {
@@ -24,9 +24,9 @@ const tutorials: Array<TutorialModel> = [
     },
     {
         Id: 4,
-        Label: 'Angular Official Documentation',
-        Url: 'https://angular.io/',
-        Target: '_blank',
+        Label: 'Angular fxLayout Examples',
+        Url: 'https://tburleson-layouts-demos.firebaseapp.com/#/docs',
+        Target: '_blank'
     }
 ];
 

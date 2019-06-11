@@ -10,7 +10,7 @@ import { NavLinkModel } from '@fathym-it/hello-world-common';
 export class NavigationConstants {
     public static readonly MENU_ITEMS: Array<NavLinkModel> = [
         { Label: 'Home', RouterURL: '/home', Icon: 'home'},
-        { Label: 'Reactive Form', RouterURL: '/reactiveForm', Icon: 'format_align_justify'},
+        { Label: 'Reactive Form', RouterURL: '/reactiveForm', Icon: 'vertical_split'},
         { Label: 'Tutorials', RouterURL: '/tutorials', Icon: 'school'}
     ]
 }

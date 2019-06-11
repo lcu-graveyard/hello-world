@@ -5,6 +5,12 @@
   filter: alpha(opacity=$opacity); /* For IE8 and earlier */
 }
 
+@mixin mat-icon-size($size: 24px) {
+  font-size: $size;
+  height: $size;
+  width: $size;
+}
+
 html,
 body {
   height: 100%;
@@ -35,6 +41,10 @@ body {
     left: 0;
 
     @include opacity(.35);
+  }
+
+  .cursor-pointer {
+    cursor: pointer;
   }
   
   @media screen and (max-width: 1024px) { /* Specific to this particular image */

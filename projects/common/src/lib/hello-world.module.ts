@@ -1,6 +1,7 @@
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MaterialModule } from '@lcu-ide/common';
 
@@ -34,7 +35,9 @@ import { NavListComponent } from './controls/nav-list/nav-list.component';
     CommonModule,
     MaterialModule,
     RouterModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   exports: [
     TutorialsComponent,
@@ -46,7 +49,9 @@ import { NavListComponent } from './controls/nav-list/nav-list.component';
     SideNavComponent,
     UserComponent,
     UsersListComponent,
-    NavListComponent
+    NavListComponent,
+    ReactiveFormsModule,
+    FormsModule
   ],
   entryComponents: [
     TutorialsComponent,

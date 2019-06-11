@@ -7,6 +7,7 @@ import { Subject } from 'rxjs/internal/Subject';
 @Injectable({
   providedIn: 'root'
 })
+
 export class SharedNotificationService {
 
   public TutorialsDataUpdated = new Subject<Array<TutorialModel>>();

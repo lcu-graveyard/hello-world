@@ -21,19 +21,13 @@ export class TutorialsComponent implements OnInit, OnDestroy {
   constructor(protected sharedNotificationService: SharedNotificationService, protected tutorialsService: TutorialService) { }
 
   public ngOnInit() {
-    // this.tutorialDataSubscription = this.sharedNotificationService.TutorialsDataUpdated.subscribe(
-    //   (data: Array<TutorialModel>) => {
-    //       console.log('tutorial component', data);
-    //       this.Tutorials = data;
-    //    }
-    //   );
     this.tutorialsService.GetTutorials().subscribe((data: Array<TutorialModel>) => {
       this.Tutorials = data;
     });
   }
 
   public ngOnDestroy(): void {
-    // this.tutorialDataSubscription.unsubscribe();
+    
   }
 
 }
