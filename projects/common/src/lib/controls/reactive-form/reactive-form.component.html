@@ -9,7 +9,6 @@
         <mat-card-title>{{ Title }}</mat-card-title>
         <mat-card-subtitle>{{ SubTitle }}</mat-card-subtitle>
       </mat-card-header>
-      <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
       <mat-card-content>
 
       <form
@@ -134,19 +133,12 @@
                 <div fxFlex fxLayout.lg="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign="start center" fxLayoutGap="10px">
                     <mat-icon color="accent">home</mat-icon>
                     <mat-form-field fxFlex>
-                        <mat-label>State</mat-label>
-                        <mat-select required>
-                          <mat-option *ngFor="let state of States" [value]="state.Abbreviation">
-                            {{state.Name}}
-                          </mat-option>
-                        </mat-select>
-                      <!-- <mat-error *ngFor="let validation of VMEmail">
-                      <mat-error *ngIf="EmailControl.hasError(validation.Type) && EmailControl.dirty || EmailControl.touched">
-                      <mat-error *ngIf="validation.Type === 'pattern'">
-                        {{validation.Message}}
-                      </mat-error>
-                      </mat-error>
-                      </mat-error> -->
+                      <input matInput placeholder="State" aria-label="State" [matAutocomplete]="auto" formControlName="stateControl">
+                      <mat-autocomplete #auto="matAutocomplete">
+                        <mat-option *ngFor="let state of StatesFiltered | async" [value]="state.Name">
+                          <span>{{state.Name}}</span>
+                        </mat-option>
+                      </mat-autocomplete>
                     </mat-form-field>
                   </div>
 
@@ -183,7 +175,7 @@
 
               <div fxLayout="row" fxLayoutAlign="start center">
                   <mat-slide-toggle color="primary" formControlName="termsControl" required [checked]="TermsChecked"></mat-slide-toggle>
-                  <button mat-button color="primary" (click)="ShowTermsAndConditions()">Agree to terms / conditions</button>
+                  <button mat-button color="accent" (click)="ShowTermsAndConditions()">Agree to terms / conditions</button>
                 </div>
 
               <div fxFlex fxLayout.lg="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign="start center" fxLayoutGap="10px">
@@ -193,7 +185,7 @@
                     </button>
                   </div>
                   <div fxFlex>
-                      <button mat-raised-button color="warn" [disabled]="!Form.valid" (click)="ClearForm()">
+                      <button mat-raised-button color="warn" [disabled]="!Form.dirty" (click)="ClearForm()">
                           Clear
                       </button>
                     </div>

@@ -17,7 +17,6 @@ import { UserComponent } from './controls/user/user.component';
 import { UsersListComponent } from './controls/users-list/users-list.component';
 import { NavListComponent } from './controls/nav-list/nav-list.component';
 
-
 @NgModule({
   declarations: [
     TutorialsComponent,
