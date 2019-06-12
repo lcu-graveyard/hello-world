@@ -8,7 +8,7 @@ import { ReactiveFormModel } from './../../models/reactive-form.model';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/internal/operators/map';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { PasswordValidator, EmailValidator, UserNameValidator } from '@lcu-ide/common';
+import { PasswordValidator, EmailValidator, UserNameValidator, ValidationMessages, ZipcodeValidator } from '@lcu-ide/common';
 import { startWith } from 'rxjs/operators';
 
 
@@ -124,7 +124,7 @@ export class ReactiveFormComponent implements OnInit {
    * Access username field
    */
   public get UsernameControl(): AbstractControl {
-    return this.Form.get('userNameControl');
+    return this.Form.get('usernameControl');
   }
 
   /**
@@ -156,6 +156,10 @@ export class ReactiveFormComponent implements OnInit {
    * property to states list
    */
   public States: Array<StatesModel>;
+
+  /**
+   * property for filtered states list
+   */
   public StatesFiltered: Observable<Array<StatesModel>>;
 
   /**
@@ -173,13 +177,43 @@ export class ReactiveFormComponent implements OnInit {
    */
   public SubTitle: string;
 
+  /**
+   * Confirm password validation
+   */
+  public VMConfirmPassword: ValidationMessages;
+
+  /**
+   * Email validation
+   */
+  public VMEmail: ValidationMessages;
+
+  /**
+   * Password validation
+   */
+  public VMPassword: ValidationMessages;
+
+  /**
+   * Username validation
+   */
+  public VMUsername: ValidationMessages;
+
+  public VMZipcode: ValidationMessages;
+
+
   constructor(
     protected activatedRoute: ActivatedRoute,
     protected reactiveFormService: ReactiveFormService,
     protected breakpointObserver: BreakpointObserver) {
+
     this.Title = 'Angular Reactive Form';
     this.TitleIcon = 'vertical_split';
     this.SubTitle = 'Responsive Form';
+
+    this.VMConfirmPassword = ValidationMessages.ConfirmPassword;
+    this.VMEmail = ValidationMessages.Email;
+    this.VMPassword = ValidationMessages.Password;
+    this.VMUsername = ValidationMessages.UserName;
+    this.VMZipcode = ValidationMessages.Zipcode;
 
     this.monitorBreakpoints();
   }
@@ -224,7 +258,7 @@ export class ReactiveFormComponent implements OnInit {
       lastNameControl: new FormControl(this.sessionValues.lastName, Validators.compose([Validators.required])),
       usernameControl: new FormControl(this.sessionValues.Username, Validators.compose([
         Validators.required,
-        Validators.pattern(UserNameValidator.UsernamePattern)])),
+        Validators.pattern(UserNameValidator.UsernameNoUnderscoreDotPattern)])),
       emailControl: new FormControl(this.sessionValues.Email, Validators.compose(
         [
           Validators.required,
@@ -237,8 +271,11 @@ export class ReactiveFormComponent implements OnInit {
       addressControl: new FormControl(this.sessionValues.Address, Validators.compose([Validators.required])),
       cityControl: new FormControl(this.sessionValues.City, Validators.compose([Validators.required])),
       stateControl: new FormControl(this.sessionValues.State, Validators.compose([Validators.required])),
-      termsControl: new FormControl(this.sessionValues.Terms, Validators.compose([Validators.required])),
-      zipcodeControl: new FormControl(this.sessionValues.Zipcode, Validators.compose([Validators.required]))
+      termsControl: new FormControl(this.sessionValues.Terms, Validators.compose([Validators.requiredTrue])),
+      zipcodeControl: new FormControl(this.sessionValues.Zipcode, Validators.compose([
+        Validators.required,
+        Validators.pattern(ZipcodeValidator.ZipcodeExpression('US'))
+      ]))
     });
 
     this.Form.validator = PasswordValidator.PasswordsMatch(this.PasswordControl, this.ConfirmPasswordControl);
