@@ -1,4 +1,9 @@
 @import '../../../node_modules/@angular/material/prebuilt-themes/pink-bluegrey';
+@import '../../../node_modules/@lcu-ide/common/assets/styles/fathym-global.styles';
+@import '../../../node_modules/@lcu-ide/common/assets/colors/fathym-contrast';
+@import './assets/themes/my-therme.scss';
+
+@include custom-theme($dark-theme);
 
 @mixin opacity($opacity) {
   opacity: $opacity;
