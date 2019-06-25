@@ -1,4 +1,10 @@
+@import './node_modules/@lcu-ide/common/assets/colors/fathym-contrast';
+
 .disabled {
     opacity: 0.5;
      filter: alpha(opacity=50); /* For IE8 and earlier */
    }
+
+.icon-font {
+  color: $contrast-red-complement-0;
+}
