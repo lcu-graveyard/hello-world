@@ -1,15 +1,17 @@
 @import '../../../node_modules/@angular/material/prebuilt-themes/pink-bluegrey';
+
 @import '../../../node_modules/@lcu-ide/common/assets/styles/fathym-global.styles';
+@import '../../../node_modules/@lcu-ide/common/assets/styles/branding/fathym-branding';
+@import './assets/themes/fathym-themes.scss';
+@import '../../../node_modules/@lcu-ide/common/assets/theming/fathym-default-theme';
 
-@import '../src/assets/themes/arctic-theme.scss';
-@import '../src/assets/themes/contrast-theme.scss';
-@import '../src/assets/themes/cool-candy-theme.scss';
-@import '../src/assets/themes/flipper-theme.scss';
-@import '../src/assets/themes/ice-theme.scss';
-@import '../src/assets/themes/sea-green-theme.scss';
-@import '../src/assets/themes/white-mint-theme.scss';
+.primary-logo {
+  background-image: url($fathym-white-logo);
+}
 
-@include custom-theme($arctic-theme);
+.foreground-color {
+ color: mat-color($primary) !important;
+}
 
 @mixin opacity($opacity) {
   opacity: $opacity;
@@ -22,22 +24,12 @@
   width: $size;
 }
 
+// for updating components with themes
 @mixin component-themes($theme) {
   // @include user-component-theme($theme);
   // @include user-list-component-theme($theme);
   // @include side-nav-component-theme($theme);
 }
-
-html,
-body {
-  height: 100%;
-}
-
-body {
-    margin: 0;
-    padding: 0;
-    font-family: Roboto, sans-serif;
-  }
 
   .app-background {
     display: flex;
@@ -47,46 +39,55 @@ body {
     max-height: -webkit-fill-available;
   }
 
-   .artic-theme {
+   .arctic-theme {
     @include custom-theme($arctic-theme);
-    // @include component-themes($dark-theme);
+    .primary-logo {
+		  background-image: url($fathym-full-ice-logo);
+    }
    }
 
    .contrast-theme {
     @include custom-theme($contrast-theme);
-    // @include component-themes($dark-theme);
+    .primary-logo {
+		  background-image: url($fathym-full-red-logo);
+    }
    }
 
    .cool-candy-theme {
     @include custom-theme($cool-candy-theme);
-    // @include component-themes($dark-theme);
+    .primary-logo {
+		  background-image: url($fathym-primary-arctic-logo);
+    }
    }
 
    .flipper-theme {
     @include custom-theme($flipper-theme);
-    // @include component-themes($dark-theme);
+    .primary-logo {
+		  background-image: url($fathym-full-ice-logo);
+    }
    }
 
    .ice-theme {
     @include custom-theme($ice-theme);
-    // @include component-themes($dark-theme);
+    .primary-logo {
+		  background-image: url($fathym-full-flipper-logo);
+    }
    }
 
    .sea-green-theme {
     @include custom-theme($sea-green-theme);
-    // @include component-themes($dark-theme);
+    .primary-logo {
+		  background-image: url($fathym-full-cool-candy-logo);
+    }
    }
 
    .white-mint-theme {
     @include custom-theme($white-mint-theme);
-    // @include component-themes($dark-theme);
+    .primary-logo {
+		  background-image: url($fathym-full-flipper-logo);
+    }
    }
-
-  //  .primary-arctic {
-  //    color: $primary-arctic-color;
-  //    background-color: $primary-arctic-color;
-  //  }
-
+   
   .disabled {
     @include opacity(.5);
    }
