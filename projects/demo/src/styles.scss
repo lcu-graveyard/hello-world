@@ -5,9 +5,9 @@
 @import './assets/themes/fathym-themes.scss';
 
 
-.primary-logo {
-  background-image: url($fathym-white-logo);
-}
+// .primary-logo {
+//   background-image: url($fathym-white-logo);
+// }
 
 .foreground-color {
  color: mat-color($primary) !important;
@@ -42,7 +42,8 @@
    .arctic-theme {
     @include custom-theme($arctic-theme);
     .primary-logo {
-		  background-image: url($fathym-full-ice-logo);
+      background-image: url($fathym-full-ice-logo);
+      // @include primary-logo($fathym-full-ice-logo, 150px);
     }
    }
 
