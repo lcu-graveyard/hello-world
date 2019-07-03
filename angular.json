@@ -206,6 +206,16 @@
                 "glob": "package.json",
                 "input": "./projects/demo/",
                 "output": "/"
+              },
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@lcu-ide/common/assets/fonts",
+                "output": "./assets/fonts"
+              },
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@lcu-ide/common/assets/images/favicons",
+                "output": "./assets/images/favicons"
               }
             ],
             "styles": [
