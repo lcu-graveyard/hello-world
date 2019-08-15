@@ -1,4 +1,3 @@
-import { AlwaysAuthGuard } from './services/guards/always-auth.guard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
