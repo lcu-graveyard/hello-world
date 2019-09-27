@@ -6,7 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { FathymSharedModule, MaterialModule } from '@lcu/common';
+import { FathymSharedModule, MaterialModule, PipeModule } from '@lcu/common';
 import { TutorialsComponent } from './controls/tutorials/tutorials.component';
 import { ReactiveFormComponent } from './controls/reactive-form/reactive-form.component';
 import { FlexLayoutComponent } from './controls/flex-layout/flex-layout.component';
@@ -40,6 +40,7 @@ import { FaviconsService, BrowserFavicons, BROWSER_FAVICONS_CONFIG } from './ser
     FlexLayoutModule,
     FathymSharedModule,
     MaterialModule,
+    PipeModule,
     FormsModule,
     ReactiveFormsModule
   ],
