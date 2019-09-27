@@ -98,14 +98,6 @@ import { UserHasRoleDirective } from './directives/user-has-role.directive';
     }
   }
 ],
-  bootstrap: [AppComponent],
-  exports: [
-    LoginComponent,
-    DashboardComponent,
-    LoggedInUserComponent,
-    DashboardAdminComponent,
-    DashboardNonAdminComponent,
-    UserHasRoleDirective],
-  entryComponents: [LoginComponent, DashboardComponent, LoggedInUserComponent, DashboardAdminComponent, DashboardNonAdminComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
