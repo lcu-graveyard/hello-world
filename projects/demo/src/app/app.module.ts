@@ -40,7 +40,12 @@ import { UserHasRoleDirective } from './directives/user-has-role.directive';
     UserComponent,
     UsersListComponent,
     NavListComponent,
-    LoginComponent
+    LoginComponent,
+    DashboardComponent,
+    LoggedInUserComponent,
+    DashboardAdminComponent,
+    DashboardNonAdminComponent,
+    UserHasRoleDirective
   ],
   imports: [
     BrowserAnimationsModule,
