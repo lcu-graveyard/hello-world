@@ -209,7 +209,7 @@
               },
               {
                 "glob": "**/*",
-                "input": "./node_modules/@lcu-ide/common/assets/images/favicons",
+                "input": "./node_modules/@lcu/common/assets/images/favicons",
                 "output": "./assets/images/favicons"
               }
             ],
