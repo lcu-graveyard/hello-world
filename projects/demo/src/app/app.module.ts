@@ -1,3 +1,4 @@
+import { LoginComponent } from './controls/login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -32,7 +33,8 @@ import { FaviconsService, BrowserFavicons, BROWSER_FAVICONS_CONFIG } from './ser
     SideNavComponent,
     UserComponent,
     UsersListComponent,
-    NavListComponent
+    NavListComponent,
+    LoginComponent
   ],
   imports: [
     BrowserAnimationsModule,
