@@ -50,7 +50,7 @@
       },
       "architect": {
         "build": {
-          "builder": "ngx-build-plus:build",
+          "builder": "ngx-build-plus:browser",
           "options": {
             "outputPath": "dist/lcu",
             "index": "projects/lcu/src/index.html",
@@ -209,7 +209,7 @@
               },
               {
                 "glob": "**/*",
-                "input": "./node_modules/@lcu-ide/common/assets/images/favicons",
+                "input": "./node_modules/@lcu/common/assets/images/favicons",
                 "output": "./assets/images/favicons"
               }
             ],

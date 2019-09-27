@@ -1,7 +1,7 @@
 import { UsersService } from './../../services/user.service';
 import { Component, OnInit, ViewEncapsulation, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl, FormControl } from '@angular/forms';
-import { BaseModeledResponse, Status } from '@lcu-ide/common';
+import { BaseModeledResponse, Status } from '@lcu/common';
 import { SignInModel } from '../../models/sign-in.model';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { UserModel } from '../../models/user.model';
@@ -204,12 +204,12 @@ export class LoginComponent implements OnInit {
   public SignInHandler() {
     const signIn: SignInModel = this.buildSignInModelFromForm();
 
-    if (this.userService.Login(signIn.Username, signIn.Password) === false) {
-      this.LoginError = 'Login Failed';
-    } else {
-      this.LoginError = 'Success';
-      this.Form.reset();
-    }
+    // if (this.userService.Login(signIn.Username, signIn.Password) === false) {
+    //   this.LoginError = 'Login Failed';
+    // } else {
+    //   this.LoginError = 'Success';
+    //   this.Form.reset();
+    // }
   }
 
   /**
@@ -225,8 +225,8 @@ export class LoginComponent implements OnInit {
    * @param user selected user
    */
   public SetLogin(user: UserModel): void {
-    this.UsernameControl.setValue(user.Username);
-    this.PasswordControl.setValue(user.Password);
+    // this.UsernameControl.setValue(user.Username);
+    // this.PasswordControl.setValue(user.Password);
   }
   // 	Helpers
 
