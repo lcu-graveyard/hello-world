@@ -12,7 +12,7 @@ import { ParseRouteUtil } from './utils/parse-route.utils';
 import { TutorialModel } from './models/tutorial.model';
 import { ToggleThemeUtil } from './utils/toggle-theme.utils';
 import { FaviconsService } from './services/favicons.service';
-
+import { DataPipeConstants } from '@lcu/common';
 
 
 @Component({
@@ -22,6 +22,13 @@ import { FaviconsService } from './services/favicons.service';
 })
 
 export class AppComponent implements OnInit {
+
+  public readonly PIPE_DECIMAL_FOUR: string = DataPipeConstants.PIPE_DECIMAL_FOUR;
+  public readonly PIPE_TEMP_FAHRENHEIT: string = DataPipeConstants.PIPE_TEMP_FAHRENHEIT;
+  public readonly PIPE_TEMP_KELVIN: string = DataPipeConstants.PIPE_TEMP_KELVIN;
+
+  public decimalTest: number = 3.3654432423423;
+  public fahrenheitTest: number = 73;
 
   public BackgroundImage: string;
 
@@ -86,7 +93,7 @@ export class AppComponent implements OnInit {
    * Set default theme
    */
   protected resetTheme(): void {
-    this.changeTheme('sea-green-theme');
+    this.changeTheme('contrast-theme');
   }
 
   /**

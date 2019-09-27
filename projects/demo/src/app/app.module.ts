@@ -6,7 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { FathymSharedModule, MaterialModule } from '@lcu-ide/common';
+import { FathymSharedModule, MaterialModule, PipeModule } from '@lcu/common';
 import { TutorialsComponent } from './controls/tutorials/tutorials.component';
 import { ReactiveFormComponent } from './controls/reactive-form/reactive-form.component';
 import { FlexLayoutComponent } from './controls/flex-layout/flex-layout.component';
@@ -53,6 +53,7 @@ import { UserHasRoleDirective } from './directives/user-has-role.directive';
     FlexLayoutModule,
     FathymSharedModule,
     MaterialModule,
+    PipeModule,
     FormsModule,
     ReactiveFormsModule
   ],
@@ -102,14 +103,6 @@ import { UserHasRoleDirective } from './directives/user-has-role.directive';
     }
   }
 ],
-  bootstrap: [AppComponent],
-  exports: [
-    LoginComponent,
-    DashboardComponent,
-    LoggedInUserComponent,
-    DashboardAdminComponent,
-    DashboardNonAdminComponent,
-    UserHasRoleDirective],
-  entryComponents: [LoginComponent, DashboardComponent, LoggedInUserComponent, DashboardAdminComponent, DashboardNonAdminComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
