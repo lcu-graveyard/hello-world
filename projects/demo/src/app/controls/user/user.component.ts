@@ -3,6 +3,9 @@ import { UserModel } from './../../models/user.model';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { UserStateModel } from '../../models/user-state-model';
+import { UsersStateManagerContext } from '../../state/users/user-state-manager.context';
+import { tick } from '@angular/core/testing';
 
 @Component({
   selector: 'lcu-user',
@@ -11,13 +14,30 @@ import { Subscription } from 'rxjs';
 })
 export class UserComponent implements OnInit, OnDestroy {
 
-  public User: UserModel;
+  /**
+   * Current user changed subscription
+   */
+  protected currentUserSubscription: Subscription;
 
-  protected paramsSubscription: Subscription;
-
+  /**
+   * Routing params subscription
+   */
   protected queryParamsSubscription: Subscription;
 
-  constructor(protected activatedRouter: ActivatedRoute, protected userService: UsersService) { }
+  /**
+   * User
+   */
+  public User: UserModel;
+
+  /**
+   * User state model
+   */
+  public State: UserStateModel;
+
+  constructor(
+    protected activatedRouter: ActivatedRoute,
+    protected userService: UsersService,
+    protected userCtxt: UsersStateManagerContext) { }
 
   public ngOnInit(): void {
 
@@ -25,25 +45,24 @@ export class UserComponent implements OnInit, OnDestroy {
       this.getUserById(queryParams.id);
     });
 
-    // This will only happen once, when the component is loaded
-    // this.User = new UserModel(
-    //   this.activatedRouter.snapshot.params.id,
-    //   this.activatedRouter.snapshot.params.name,
-    //   this.activatedRouter.snapshot.params.role);
+    this.currentUserSubscription = this.userService.CurrentUserChanged.subscribe((user: UserModel) => {
+      this.User = user;
+    });
 
-     // Use this if the params will change when the component is already loaded
-     // If the component will never be sent new data, then don't do this
-    // this.paramsSubscription = this.activatedRouter.params.subscribe((params: Params) => {
-    //   this.User.Id = params.id;
-    //   this.User.Name = params.name;
-    //   this.User.Role = params.role;
+    // when user state changes
+    // this.userCtxt.Context.subscribe(state => {
+    //   this.State = state;
+
+    //   if (this.State) {
+    //     this.stateChanged();
+    //   }
     // });
   }
 
   public ngOnDestroy(): void {
     // Angular will unsubscribe the route observable, but we can still do it ourselves
-    // this.paramsSubscription.unsubscribe();
     this.queryParamsSubscription.unsubscribe();
+    this.currentUserSubscription.unsubscribe();
   }
 
   /**
@@ -53,6 +72,20 @@ export class UserComponent implements OnInit, OnDestroy {
    */
   protected getUserById(id: number): void {
     this.User = this.userService.GetUserById(id);
+
+    /**
+     * Getting the use from the state
+     */
+    // this.User = this.userCtxt.GetUserById(id);
+  }
+
+  /**
+   * listen for state change
+   */
+  protected stateChanged(): void {
+    if (!this.State) {
+      return;
+    }
   }
 
 }
