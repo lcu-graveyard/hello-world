@@ -20,6 +20,15 @@ import { NavListComponent } from './controls/nav-list/nav-list.component';
 import { TutorialService } from './services/tutorial.service';
 import { FaviconsService, BrowserFavicons, BROWSER_FAVICONS_CONFIG } from './services/favicons.service';
 import { LoginComponent } from './controls/login/login.component';
+<<<<<<< HEAD
+=======
+import { UsersService } from './services/user.service';
+import { DashboardComponent } from './controls/dashboard/dashboard.component';
+import { LoggedInUserComponent } from './controls/logged-in-user/logged-in-user.component';
+import { DashboardAdminComponent } from './controls/dashboard-admin/dashboard-admin.component';
+import { DashboardNonAdminComponent } from './controls/dashboard-non-admin/dashboard-non-admin.component';
+import { UserHasRoleDirective } from './directives/user-has-role.directive';
+>>>>>>> 4cad5127b01dafc83431a7e70dd5e16b675430bc
 
 @NgModule({
   declarations: [
@@ -46,7 +55,9 @@ import { LoginComponent } from './controls/login/login.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [TutorialService,
+  providers: [
+    UsersService,
+    TutorialService,
   {
     provide: FaviconsService, useClass: BrowserFavicons
   },
@@ -90,6 +101,14 @@ import { LoginComponent } from './controls/login/login.component';
     }
   }
 ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [
+    LoginComponent,
+    DashboardComponent,
+    LoggedInUserComponent,
+    DashboardAdminComponent,
+    DashboardNonAdminComponent,
+    UserHasRoleDirective],
+  entryComponents: [LoginComponent, DashboardComponent, LoggedInUserComponent, DashboardAdminComponent, DashboardNonAdminComponent]
 })
 export class AppModule { }
