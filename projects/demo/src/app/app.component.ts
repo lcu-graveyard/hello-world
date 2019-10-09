@@ -12,13 +12,15 @@ import { ParseRouteUtil } from './utils/parse-route.utils';
 import { TutorialModel } from './models/tutorial.model';
 import { ToggleThemeUtil } from './utils/toggle-theme.utils';
 import { FaviconsService } from './services/favicons.service';
-import { DataPipeConstants } from '@lcu/common';
+import { DataPipeConstants, LCUServiceSettings, FathymSharedModule, RealTimeService } from '@lcu/common';
+import { environment } from '../environments/environment';
+import { UsersStateManagerContext } from './state/users/user-state-manager.context';
 
 
 @Component({
   selector: 'lcu-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 
 export class AppComponent implements OnInit {
@@ -48,9 +50,10 @@ export class AppComponent implements OnInit {
     protected sharedNotificationService: SharedNotificationService,
     protected tutorialsService: TutorialService,
     protected overlayContainer: OverlayContainer,
-    protected faviconsService: FaviconsService) {
+    protected faviconsService: FaviconsService,
+    protected realTimeService: RealTimeService) {
 
-    this.BackgroundImage = './assets/images/bg_image.jpg';
+    // this.BackgroundImage = './assets/images/bg_image.jpg';
   }
 
   public ngOnInit(): void {
@@ -62,6 +65,9 @@ export class AppComponent implements OnInit {
 
     this.resetTheme();
     this.resetFavicon();
+
+    // shannon test
+    console.log('Settings', this.realTimeService.Settings);
   }
 
   /**
