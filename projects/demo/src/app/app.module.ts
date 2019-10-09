@@ -6,7 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { FathymSharedModule, MaterialModule, PipeModule } from '@lcu/common';
+import { FathymSharedModule, MaterialModule, PipeModule, LCUServiceSettings, RealTimeService } from '@lcu/common';
 import { TutorialsComponent } from './controls/tutorials/tutorials.component';
 import { ReactiveFormComponent } from './controls/reactive-form/reactive-form.component';
 import { FlexLayoutComponent } from './controls/flex-layout/flex-layout.component';
@@ -26,6 +26,8 @@ import { LoggedInUserComponent } from './controls/logged-in-user/logged-in-user.
 import { DashboardAdminComponent } from './controls/dashboard-admin/dashboard-admin.component';
 import { DashboardNonAdminComponent } from './controls/dashboard-non-admin/dashboard-non-admin.component';
 import { UserHasRoleDirective } from './directives/user-has-role.directive';
+import { UsersStateManagerContext } from './state/users/user-state-manager.context';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -58,7 +60,13 @@ import { UserHasRoleDirective } from './directives/user-has-role.directive';
     ReactiveFormsModule
   ],
   providers: [
+    UsersStateManagerContext,
+    {
+      provide: LCUServiceSettings,
+      useValue: FathymSharedModule.DefaultServiceSettings(environment)
+    },
     UsersService,
+    RealTimeService,
     TutorialService,
   {
     provide: FaviconsService, useClass: BrowserFavicons
