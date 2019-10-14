@@ -28,6 +28,8 @@ import { DashboardNonAdminComponent } from './controls/dashboard-non-admin/dashb
 import { UserHasRoleDirective } from './directives/user-has-role.directive';
 import { UsersStateManagerContext } from './state/users/user-state-manager.context';
 import { environment } from '../environments/environment';
+import { MaterialKitchenSinkComponent, KitchenSinkComponent } from './controls/material-kitchen-sink/material-kitchen-sink.component';
+import { MatBottomSheet } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -43,11 +45,13 @@ import { environment } from '../environments/environment';
     UsersListComponent,
     NavListComponent,
     LoginComponent,
+    KitchenSinkComponent,
     DashboardComponent,
     LoggedInUserComponent,
     DashboardAdminComponent,
     DashboardNonAdminComponent,
-    UserHasRoleDirective
+    UserHasRoleDirective,
+    MaterialKitchenSinkComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -60,6 +64,7 @@ import { environment } from '../environments/environment';
     ReactiveFormsModule
   ],
   providers: [
+    MatBottomSheet,
     UsersStateManagerContext,
     {
       provide: LCUServiceSettings,
