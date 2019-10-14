@@ -204,12 +204,12 @@ export class LoginComponent implements OnInit {
   public SignInHandler() {
     const signIn: SignInModel = this.buildSignInModelFromForm();
 
-    // if (this.userService.Login(signIn.Username, signIn.Password) === false) {
-    //   this.LoginError = 'Login Failed';
-    // } else {
-    //   this.LoginError = 'Success';
-    //   this.Form.reset();
-    // }
+    if (this.userService.Login(signIn.Username, signIn.Password) === false) {
+      this.LoginError = 'Login Failed';
+    } else {
+      this.LoginError = 'Success';
+      this.Form.reset();
+    }
   }
 
   /**
@@ -225,8 +225,8 @@ export class LoginComponent implements OnInit {
    * @param user selected user
    */
   public SetLogin(user: UserModel): void {
-    // this.UsernameControl.setValue(user.Username);
-    // this.PasswordControl.setValue(user.Password);
+    this.UsernameControl.setValue(user.Username);
+    this.PasswordControl.setValue(user.Password);
   }
   // 	Helpers
 
