@@ -12,7 +12,7 @@ import { DataSource } from '@angular/cdk/table';
     <button mat-raised-button color="primary">Do the thing</button>
   `
 })
-export class TestEntryComponent {}
+export class KitchenSinkComponent {}
 
 @Component({
   selector: 'lcu-material-kitchen-sink',
@@ -49,10 +49,10 @@ export class MaterialKitchenSinkComponent implements OnInit {
 
  ngOnInit() {}
  openDialog() {
-   this.dialog.open(TestEntryComponent);
+   this.dialog.open(KitchenSinkComponent);
  }
  openBottomSheet() {
-   this.bottomSheet.open(TestEntryComponent);
+   this.bottomSheet.open(KitchenSinkComponent);
  }
 }
 
