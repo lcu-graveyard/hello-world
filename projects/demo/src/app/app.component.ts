@@ -1,3 +1,4 @@
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import {OverlayContainer} from '@angular/cdk/overlay';
@@ -15,7 +16,7 @@ import { FaviconsService } from './services/favicons.service';
 import { DataPipeConstants, LCUServiceSettings, FathymSharedModule, RealTimeService } from '@lcu/common';
 import { environment } from '../environments/environment';
 import { UsersStateManagerContext } from './state/users/user-state-manager.context';
-
+import { ColorPickerService } from './services/color-picker.service';
 
 @Component({
   selector: 'lcu-root',
@@ -40,6 +41,8 @@ export class AppComponent implements OnInit {
 
   public SelectedTheme: string;
 
+  public ThemeClass: BehaviorSubject<string>;
+
   public title = 'demo';
 
   protected themesSubscriptions: Subscription;
@@ -51,7 +54,8 @@ export class AppComponent implements OnInit {
     protected tutorialsService: TutorialService,
     protected overlayContainer: OverlayContainer,
     protected faviconsService: FaviconsService,
-    protected realTimeService: RealTimeService) {
+    protected realTimeService: RealTimeService,
+    protected colorPickerService: ColorPickerService) {
 
     // this.BackgroundImage = './assets/images/bg_image.jpg';
   }
@@ -59,9 +63,9 @@ export class AppComponent implements OnInit {
   public ngOnInit(): void {
     this.Links = NavigationConstants.MENU_ITEMS;
 
-    this.themesSubscriptions = this.sharedNotificationService.ThemeChanged.subscribe((val: string) => {
-      this.changeTheme(val);
-    });
+    // this.themesSubscriptions = this.sharedNotificationService.ThemeChanged.subscribe((val: string) => {
+    //   this.changeTheme(val);
+    // });
 
     this.resetTheme();
     this.resetFavicon();
@@ -99,26 +103,29 @@ export class AppComponent implements OnInit {
    * Set default theme
    */
   protected resetTheme(): void {
-    this.changeTheme('contrast-theme');
+   // this.changeTheme('contrast-theme');
+   this.ThemeClass = this.colorPickerService.GetColorClass();
   }
 
   /**
    * Toggle themes
+   * 
+   * This is the old way of toggling themes, still work, just prefer the new method above
    *
    * @param val theme to change to
    */
-  protected changeTheme(val: string): void {
-    this.SelectedTheme = val;
+//   protected changeTheme(val: string): void {
+//     this.SelectedTheme = val;
 
-    const element: HTMLElement = this.overlayContainer.getContainerElement();
-    const classList: DOMTokenList = element.classList;
+//     const element: HTMLElement = this.overlayContainer.getContainerElement();
+//     const classList: DOMTokenList = element.classList;
 
-    const toggleTheme: ToggleThemeUtil = new ToggleThemeUtil();
-    classList.add(ToggleThemeUtil.Toggle(element.classList, val));
+//     const toggleTheme: ToggleThemeUtil = new ToggleThemeUtil();
+//     classList.add(ToggleThemeUtil.Toggle(element.classList, val));
 
-    // update favicon when theme changes
-    this.changeFavicon(this.SelectedTheme);
- }
+//     // update favicon when theme changes
+//     this.changeFavicon(this.SelectedTheme);
+//  }
 
   protected routeChanged(): void {
 
