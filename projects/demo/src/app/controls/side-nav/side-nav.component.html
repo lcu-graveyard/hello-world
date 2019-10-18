@@ -36,8 +36,15 @@
                             <mat-menu #menu="matMenu">
                               <div *ngFor="let theme of Themes" >
                                 <div fxLayout="row" fxLayoutGap="10px" fxFlex fxLayoutAlign="start center" mat-menu-item (click)="PickTheme(theme.Color)" >
-                                    <mat-icon [ngClass]="theme.ColorSwatch">{{theme.Icon}}</mat-icon>  
-                                    <span matSuffix matTooltip="Enter a unique name for your new organization" matTooltipClass="tooltip-background">{{theme.Label}}</span>
+                                    <mat-icon 
+                                      matTooltipHideDelay="100000"
+                                      matTooltipPosition="right"
+                                      matTooltip="{{theme.ColorSwatch}}" 
+                                      matTooltipClass="tooltip-background"
+                                      [ngClass]="theme.ColorSwatch">
+                                      {{theme.Icon}}
+                                    </mat-icon>  
+                                    <span>{{theme.Label}}</span>
                                 </div>
                               </div>
                             </mat-menu>
