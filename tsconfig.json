@@ -12,6 +12,8 @@
 		"experimentalDecorators": true,
 		"importHelpers": true,
 		"target": "es2015",
+		"noImplicitAny": true,
+		"suppressImplicitAnyIndexErrors": true,
 		"typeRoots": [
 			"node_modules/@types"
 		],
@@ -29,12 +31,8 @@
 		}
 	},
 	"angularCompilerOptions": {
-		"enableIvy": true,
-		"noImplicitAny": true,
-		"strictInputTypes": true,
-		"fullTemplateTypeCheck": true,
+		"enableIvy": false,
 		"strictInjectionParameters": true,
-		"strictOutputEventTypes": true,
 		"strictTemplates": true
 	}
 }
