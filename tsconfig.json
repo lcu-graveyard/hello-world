@@ -5,12 +5,13 @@
 		"outDir": "./dist/out-tsc",
 		"sourceMap": true,
 		"declaration": false,
-		"module": "es2015",
+		"downlevelIteration": true,
+		"module": "esnext",
 		"moduleResolution": "node",
 		"emitDecoratorMetadata": true,
 		"experimentalDecorators": true,
 		"importHelpers": true,
-		"target": "es5",
+		"target": "es2015",
 		"typeRoots": [
 			"node_modules/@types"
 		],
@@ -26,5 +27,14 @@
 				"dist/common/*"
 			]
 		}
+	},
+	"angularCompilerOptions": {
+		"enableIvy": true,
+		"noImplicitAny": true,
+		"strictInputTypes": true,
+		"fullTemplateTypeCheck": true,
+		"strictInjectionParameters": true,
+		"strictOutputEventTypes": true,
+		"strictTemplates": true
 	}
 }
