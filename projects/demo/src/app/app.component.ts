@@ -18,11 +18,6 @@ import { environment } from '../environments/environment';
 // import { UsersStateManagerContext } from './state/users/user-state-manager.context';
 import { ColorPickerService } from './services/color-picker.service';
 
-interface User {
-  name: string;
-  age: number;
-}
-
 @Component({
   selector: 'lcu-root',
   templateUrl: './app.component.html',
@@ -30,11 +25,6 @@ interface User {
 })
 
 export class AppComponent implements OnInit {
-
-  user: User = {
-    name: 'shannon',
-    age: 47
-  };
 
   public readonly PIPE_DECIMAL_FOUR: string = DataPipeConstants.PIPE_DECIMAL_FOUR;
   public readonly PIPE_TEMP_FAHRENHEIT: string = DataPipeConstants.PIPE_TEMP_FAHRENHEIT;

@@ -23,10 +23,10 @@ export class SideNavComponent {
       map(result => result.matches)
     );
 
-    @Input()
-    set name(val: string) {
-      console.log('name', val);
-    }
+    // @Input()
+    // set name(val: string) {
+    //   console.log('name', val);
+    // }
 
   protected _navLinks: Array<NavLinkModel>;
 
