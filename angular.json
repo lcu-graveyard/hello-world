@@ -216,8 +216,7 @@
             "styles": [
               "projects/demo/src/styles.scss"
             ],
-            "scripts": [],
-            "es5BrowserSupport": true
+            "scripts": []
           },
           "configurations": {
             "production": {
